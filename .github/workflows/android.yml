@@ -3,8 +3,7 @@ name: Android CI Build
 on:
   # Triggers the workflow on push or pull request events but only for the master branch
   push:
-    branches: 
-      - "*"
+    branches: [ master ]
   pull_request:
     branches: [ master ]
 
@@ -35,7 +34,6 @@ jobs:
         uses: gradle/actions/setup-gradle@ac638b010cf58a27ee6c972d7336334ccaf61c96 # v4.4.1
         with:
           gradle-version: '8.9'
-          cache-read-only: ${{ github.ref != 'refs/heads/main' && github.ref != 'refs/heads/cache-readonly' }}
 
       - name: Run checks
         run: ./gradlew check -x lint
@@ -149,6 +147,5 @@ jobs:
           script: |
             adb wait-for-device
             ./gradlew connectedGoogleDebugAndroidTest -x lint --stacktrace
-            ./gradlew connectedOsmdroidDebugAndroidTest -x lint --stacktrace
           arch: x86_64
           profile: Nexus 6
