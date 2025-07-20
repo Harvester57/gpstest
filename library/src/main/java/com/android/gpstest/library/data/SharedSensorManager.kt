@@ -129,7 +129,7 @@ class SharedSensorManager constructor(
         try {
             if (SatelliteUtils.isRotationVectorSensorSupported(context)) {
                 // Use the modern rotation vector sensors
-                val vectorSensor: Sensor =
+                val vectorSensor: Sensor? =
                     sensorManager.getDefaultSensor(Sensor.TYPE_ROTATION_VECTOR)
                 sensorManager.registerListener(
                     callback,
